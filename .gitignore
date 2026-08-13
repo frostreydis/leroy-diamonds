@@ -1,0 +1,30 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (ak sa v budúcnosti pridá build proces / balíčky)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Build output (ak vznikne)
+dist/
+build/
+.cache/
+
+# Lokálne env súbory
+.env
+.env.local
+
+# Zip archívy a zálohy
+*.zip
+*.bak
