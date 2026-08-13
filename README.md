@@ -1,106 +1,119 @@
 # Leroy Diamonds — Web Mockup
 
-Statický jednostránkový (one-page) makéta webu pre klenotnícku spoločnosť
-**Leroy Diamonds s. r. o.** (Bratislava). Luxusný, minimalistický dizajn
-v čiernej farbe, dvojjazyčný obsah (SK / EN), pripravený na nasadenie
-cez GitHub Pages.
+A static one-page website mockup for **Leroy Diamonds s. r. o.**, a jewelry
+atelier based in Bratislava, Slovakia. Minimalist, luxury-oriented design in
+black with bilingual content (SK / EN), ready for deployment via GitHub
+Pages.
 
-## Štruktúra projektu
+## Project structure
 
 ```
 leroy-diamonds-site/
-├── index.html          # celá stránka (HTML + CSS + JS v jednom súbore)
-├── images/              # reálne fotografie šperkov Leroy Diamonds
+├── index.html          # the entire page (HTML + CSS + JS in one file)
+├── images/              # real Leroy Diamonds jewelry photographs
 │   ├── ring-marquise-halo.png
 │   ├── ring-rose-1.png
 │   ├── ring-rose-2.png
 │   ├── ring-solitaire-twist.png
 │   ├── ring-claddagh.png
 │   └── bracelet-tennis.png
-├── robots.txt           # povolenie indexovania pre vyhľadávače
-├── sitemap.xml           # mapa stránky pre Google Search Console
+├── robots.txt           # crawler permissions
+├── sitemap.xml           # sitemap for Google Search Console
 ├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
-## Ako spustiť lokálne
+## Running locally
 
-Stránka je čisté HTML/CSS/JS bez build procesu — stačí ju otvoriť
-priamo v prehliadači, alebo spustiť jednoduchý lokálny server:
+The site is plain HTML/CSS/JS with no build step — open it directly in a
+browser, or serve it with a simple local server:
 
 ```bash
-# z priečinka leroy-diamonds-site/
+# from inside leroy-diamonds-site/
 python3 -m http.server 8000
-# potom otvoriť http://localhost:8000
+# then open http://localhost:8000
 ```
 
-## Nasadenie na GitHub Pages
+## Deploying to GitHub Pages
 
-1. Vytvorte nový repozitár na GitHub (napr. `leroy-diamonds-web`).
-2. Obsah tohto priečinka nahrajte do repozitára (do `main` vetvy, do koreňa):
+1. Create a new GitHub repository (e.g. `leroy-diamonds-web`).
+2. Push the contents of this folder to the repository (`main` branch, root):
    ```bash
    git init
    git add .
    git commit -m "Initial site"
    git branch -M main
-   git remote add origin https://github.com/<vas-ucet>/leroy-diamonds-web.git
+   git remote add origin https://github.com/<your-account>/leroy-diamonds-web.git
    git push -u origin main
    ```
-3. V repozitári choďte do **Settings → Pages**.
-4. Pri **Source** vyberte vetvu `main` a priečinok `/ (root)`.
-5. Uložte — GitHub vygeneruje URL v tvare:
-   `https://<vas-ucet>.github.io/leroy-diamonds-web/`
-6. Nasadenie trvá spravidla 1–2 minúty.
+3. In the repository, go to **Settings → Pages**.
+4. Under **Source**, select the `main` branch and the `/ (root)` folder.
+5. Save — GitHub will generate a URL like:
+   `https://<your-account>.github.io/leroy-diamonds-web/`
+6. Deployment usually takes 1–2 minutes.
 
-### Vlastná doména (napr. leroydiamonds.sk)
+### Custom domain (e.g. leroydiamonds.sk)
 
-1. V **Settings → Pages → Custom domain** zadajte `leroydiamonds.sk`.
-2. U registrátora domény pridajte DNS záznamy:
-   - `A` záznamy na IP adresy GitHub Pages (185.199.108.153,
-     185.199.109.153, 185.199.110.153, 185.199.111.153), alebo
-   - `CNAME` záznam smerujúci na `<vas-ucet>.github.io`, ak používate
-     subdoménu (napr. `www`).
-3. GitHub automaticky vytvorí súbor `CNAME` v repozitári — nezmazať.
-4. Zapnite **Enforce HTTPS** po tom, čo sa DNS overí (môže trvať pár hodín).
+1. In **Settings → Pages → Custom domain**, enter `leroydiamonds.sk`.
+2. At your domain registrar, add DNS records:
+   - `A` records pointing to the GitHub Pages IPs (185.199.108.153,
+     185.199.109.153, 185.199.110.153, 185.199.111.153), or
+   - a `CNAME` record pointing to `<your-account>.github.io` if you're
+     using a subdomain (e.g. `www`).
+3. GitHub will automatically create a `CNAME` file in the repository —
+   don't delete it.
+4. Enable **Enforce HTTPS** once DNS has propagated (can take a few hours).
 
-## SEO — čo je už pripravené
+## SEO — what's already in place
 
-- `<title>`, `meta description`, `keywords` (SK, prepínajú sa aj pri EN)
-- Open Graph a Twitter Card tagy (náhľad pri zdieľaní na FB/IG/LinkedIn/X)
+- `<title>`, `meta description`, `keywords` (Slovak by default, also
+  switched when EN is active)
+- Open Graph and Twitter Card tags (nice previews when shared on
+  Facebook/Instagram/LinkedIn/X)
 - `canonical` URL
-- Štruktúrované dáta **JSON-LD** typu `JewelryStore` (adresa, sociálne siete,
-  cenová kategória) — pomáha Google pochopiť, o aký biznis ide
-- `robots.txt` + `sitemap.xml` pre Google Search Console
-- Sémantické `alt` texty pri všetkých fotografiách
+- **JSON-LD** structured data of type `JewelryStore` (address, social
+  profiles, price range) — helps Google understand what kind of business
+  this is
+- `robots.txt` + `sitemap.xml` for Google Search Console
+- Descriptive `alt` text on every image
 
-### Čo je potrebné doplniť pred ostrým nasadením
+### Still to do before going live
 
-- [ ] Nahradiť `https://leroydiamonds.sk/` v `index.html`, `robots.txt`,
-      `sitemap.xml` a JSON-LD skutočnou finálnou doménou (ak bude iná)
-- [ ] Doplniť reálny telefón a e-mail (v `index.html` sú označené
-      `doplniť reálny kontakt` / `to be added`)
-- [ ] Nahradiť `og:image` a favicon skutočným logom/brand vizuálom
-      (aktuálne sa používa fotka prsteňa ako dočasný placeholder)
-- [ ] Zaregistrovať doménu v Google Search Console a odoslať `sitemap.xml`
-- [ ] Zvážiť samostatné URL pre EN verziu (napr. `/en/`) pre správne
-      `hreflang` značky — aktuálne je prepínač jazyka riešený cez JS na
-      jednej URL, čo je vizuálne v poriadku, ale Google indexuje primárne
-      slovenskú verziu ako predvolenú
+- [ ] Replace `https://leroydiamonds.sk/` in `index.html`, `robots.txt`,
+      `sitemap.xml` and the JSON-LD block with the final real domain (if
+      different)
+- [ ] Add a real phone number and email (currently marked as
+      `doplniť reálny kontakt` / `to be added` in `index.html`)
+- [ ] Replace the `og:image` and favicon with the actual logo/brand asset
+      (a ring photo is currently used as a temporary placeholder)
+- [ ] Register the domain in Google Search Console and submit
+      `sitemap.xml`
+- [ ] Consider a separate URL for the EN version (e.g. `/en/`) for proper
+      `hreflang` tagging — the current language switch is handled via JS
+      on a single URL, which works visually, but Google primarily indexes
+      the Slovak version as the default
 
-## Jazyky (SK / EN)
+## Languages (SK / EN)
 
-Prepínač jazyka je v hlavičke stránky (SK je predvolený). Celý text má
-dvojicu atribútov `data-sk` / `data-en` priamo v HTML — úprava textu sa
-robí v `index.html`, netreba samostatné súbory pre preklad.
+The language switch is in the site header (Slovak is the default). Every
+piece of text carries a pair of `data-sk` / `data-en` attributes directly
+in the HTML — edit the text in `index.html`, no separate translation
+files are needed.
 
-## Fotografie
+## Photography
 
-Fotografie v `images/` sú reálne práce Leroy Diamonds (s gravírovaním
-značky). Pri pridávaní nových kúskov stačí nahrať súbor do `images/` a
-odkázať naň v `index.html` (sekcie "Kolekcie" a "Naša tvorba").
+The images in `images/` are real Leroy Diamonds pieces (with the brand
+engraving visible). To add new pieces, drop the file into `images/` and
+reference it in `index.html` (the "Collections" and "Our Work" sections).
 
-## Poznámka
+## License
 
-Toto je **maketa/prototyp** pripravená na schválenie pred plnou
-implementáciou (napr. napojenie kontaktného formulára na reálny
-backend/e-mail, prípadne e-shop funkcionalita).
+See [LICENSE](./LICENSE). This is proprietary client work — see that file
+for what is and isn't permitted.
+
+## Note
+
+This is a **mockup/prototype** intended for approval before full
+implementation (e.g. connecting the contact form to a real backend/email
+service, or adding e-commerce functionality).
