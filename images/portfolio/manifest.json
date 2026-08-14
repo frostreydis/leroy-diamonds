@@ -1,0 +1,28 @@
+{
+  "images": [
+    {
+      "file": "portfolio-01.jpg",
+      "alt": "Leroy Diamonds — marquise diamond halo ring"
+    },
+    {
+      "file": "portfolio-02.jpg",
+      "alt": "Leroy Diamonds — diamond tennis bracelet"
+    },
+    {
+      "file": "portfolio-03.jpg",
+      "alt": "Leroy Diamonds — rose motif ring"
+    },
+    {
+      "file": "portfolio-04.jpg",
+      "alt": "Leroy Diamonds — solitaire twist ring"
+    },
+    {
+      "file": "portfolio-05.jpg",
+      "alt": "Leroy Diamonds — claddagh ring"
+    },
+    {
+      "file": "portfolio-06.jpg",
+      "alt": "Leroy Diamonds — rose motif ring, detail"
+    }
+  ]
+}

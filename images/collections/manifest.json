@@ -1,0 +1,39 @@
+{
+  "images": [
+    {
+      "file": "collection-bracelets.jpg",
+      "alt": "Leroy Diamonds — diamond bracelet",
+      "sk": "Náramky",
+      "en": "Bracelets",
+      "link": "#"
+    },
+    {
+      "file": "collection-custom.jpg",
+      "alt": "Leroy Diamonds — custom rose ring",
+      "sk": "Na mieru",
+      "en": "Custom Made",
+      "link": "#process"
+    },
+    {
+      "file": "collection-engagement-rings.jpg",
+      "alt": "Leroy Diamonds — engagement ring",
+      "sk": "Zásnubné prstene",
+      "en": "Engagement Rings",
+      "link": "#"
+    },
+    {
+      "file": "collection-solitaire-rings.jpg",
+      "alt": "Leroy Diamonds — solitaire ring",
+      "sk": "Solitérne prstene",
+      "en": "Solitaire Rings",
+      "link": "#"
+    },
+    {
+      "file": "collection-wedding-bands.jpg",
+      "alt": "Leroy Diamonds — claddagh ring",
+      "sk": "Snubné obrúčky",
+      "en": "Wedding Bands",
+      "link": "#"
+    }
+  ]
+}
