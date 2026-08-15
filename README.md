@@ -17,10 +17,9 @@ leroy-diamonds-site/
 ├── images/
 │   ├── hero/             # hero background photo + manifest.json
 │   ├── philosophy/        # "Our Philosophy" photo + manifest.json
-│   ├── collections/        # "Jewelry for Every Moment" tiles + manifest.json
-│   ├── portfolio/            # "Selected Pieces" gallery + manifest.json
-│   ├── instagram/             # "Follow Our Work" gallery + manifest.json
-│   └── branding/                # og-image.jpg (social share preview)
+│   ├── portfolio/           # "Selected Pieces" gallery + manifest.json
+│   ├── instagram/            # "Follow Our Work" gallery + manifest.json
+│   └── branding/               # og-image.jpg (social share preview)
 ├── favicon.svg, favicon.ico, favicon-*.png, apple-touch-icon.png
 ├── robots.txt           # crawler permissions
 ├── sitemap.xml           # sitemap for Google Search Console (lists both languages)
@@ -61,16 +60,18 @@ python3 -m http.server 8000
    `https://<your-account>.github.io/leroy-diamonds-web/`
 6. Deployment usually takes 1–2 minutes.
 
-⚠️ **Important — this site expects to be served from the domain root.**
-Image and manifest paths (`/images/...`), the favicon, and the language
-redirect all use root-absolute URLs (starting with `/`) so that they work
-identically on both `/` and `/en/`. That's correct for a **custom domain**
-or a **user/organization Pages site** (`<account>.github.io`), but it will
-**break on a project Pages subpath** like
-`https://<account>.github.io/leroy-diamonds-web/` (images would be
-requested from the wrong place). Either use a custom domain (below,
-recommended) or a repository named `<your-account>.github.io` so Pages
-serves it from the root.
+All internal links and asset paths (favicon, image galleries, the SK/EN
+switch, the remembered-language redirect) are written as **relative**
+paths, not root-absolute ones — so this site works correctly out of the
+box whether it's served from a domain root, a custom domain, **or** a
+GitHub Pages *project* subpath like
+`https://<account>.github.io/leroy-diamonds-web/`. You don't need a
+special repo name or a custom domain just to preview it on
+`github.io/<repo>/` — a plain project Pages site works fine.
+(Only the `hreflang`/canonical/Open Graph `<meta>` tags hardcode the real
+`https://leroydiamonds.sk/...` domain, since those tags are required by
+spec to be absolute URLs — see the SEO section below for what to update
+there once you know the final domain.)
 
 ### Custom domain (e.g. leroydiamonds.sk)
 
@@ -184,7 +185,6 @@ section under `images/`:
 images/
 ├── hero/           # 1 photo — hero background
 ├── philosophy/      # 1 photo — "Our Philosophy" section
-├── collections/      # up to 8 shown — "Jewelry for Every Moment" tiles
 ├── portfolio/         # up to 12 shown — "Selected Pieces" gallery
 ├── instagram/          # "Follow Our Work" — loads 10 at a time, "Load more" for the rest
 └── branding/             # og-image.jpg — not a gallery, just the social-share asset
@@ -209,12 +209,7 @@ camera or export tool produces).
    This rewrites every `manifest.json` to match what's actually on disk.
    Filenames it already knew about keep their existing `alt` / `sk` / `en`
    captions — you only need to add captions for genuinely new files.
-3. For `images/collections/` specifically, open the generated
-   `manifest.json` afterwards and fill in the `"sk"`, `"en"` (category
-   name) and `"link"` fields — these can't be guessed automatically.
-   For the other folders the auto-generated `alt` text is normally fine
-   as-is, but feel free to refine it.
-4. Commit and push. GitHub Pages will pick up the changes on the next
+3. Commit and push. GitHub Pages will pick up the changes on the next
    deploy — no other step required.
 
 The script scans **every subfolder** of `images/` automatically — it has
@@ -231,16 +226,15 @@ also add a small fetch/render call in the `<script>` section of
 always lists *every* image it finds — the limits below are applied only
 at display time, in the browser:
 
-- **`images/collections/`** (cap: 8) and **`images/portfolio/`**
-  (cap: 12) — if the manifest has more entries than the cap, only the
-  first N (in manifest order — normally alphabetical by filename) are
-  rendered on the page. The rest simply aren't shown; they stay in the
-  folder and in `manifest.json`, so raising the cap later (or removing
-  older photos) brings them back with no re-upload needed. Each time
-  this happens, a note is logged to the browser console (`F12` →
-  Console) naming the folder and how many photos were skipped, so it's
-  never a silent surprise while you're working on the site — regular
-  visitors never see this message.
+- **`images/portfolio/`** (cap: 12) — if the manifest has more entries
+  than the cap, only the first 12 (in manifest order — normally
+  alphabetical by filename) are rendered on the page. The rest simply
+  aren't shown; they stay in the folder and in `manifest.json`, so
+  raising the cap later (or removing older photos) brings them back with
+  no re-upload needed. Each time this happens, a note is logged to the
+  browser console (`F12` → Console) naming the folder and how many
+  photos were skipped, so it's never a silent surprise while you're
+  working on the site — regular visitors never see this message.
 - **`images/instagram/`** has no hard cap — it paginates instead. The
   first 10 show on load, and every click on "Load more" reveals the
   next 10, until the whole manifest has been shown.
@@ -250,7 +244,6 @@ the `<script>` section in `index.html`:
 ```js
 const INSTAGRAM_PAGE_SIZE = 10;
 const PORTFOLIO_MAX = 12;
-const COLLECTIONS_MAX = 8;
 ```
 then run `python3 build-en.py` to apply the same change to `en/index.html`.
 

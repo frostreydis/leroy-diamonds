@@ -46,12 +46,12 @@
 <meta name="twitter:image" content="https://leroydiamonds.sk/images/branding/og-image.jpg">
 
 <!-- ===== Favicon (custom Leroy Diamonds diamond mark) ===== -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="shortcut icon" href="favicon.ico">
 <meta name="theme-color" content="#0B0B0C">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,10 +70,8 @@
   "priceRange": "€€€",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Vysoká 26",
     "addressLocality": "Bratislava",
     "addressRegion": "Bratislavský kraj",
-    "postalCode": "811 06",
     "addressCountry": "SK"
   },
   "sameAs": [
@@ -90,17 +88,11 @@
      page paints so there's no flash of the wrong language. Search engine
      crawlers never have a stored preference, so they always see this
      page's own default content — this does not affect indexing. -->
-<script>
+<script id="lang-redirect">
   (function(){
     try{
       var saved = localStorage.getItem('leroydiamonds_lang');
-      var here = location.pathname;
-      var onEn = here.indexOf('/en/') !== -1 || here.indexOf('/en') === here.length - 3;
-      if(saved === 'en' && !onEn){
-        location.replace('/en/');
-      } else if(saved === 'sk' && onEn){
-        location.replace('/');
-      }
+      if(saved === 'en'){ location.replace('en/'); }
     }catch(e){ /* storage unavailable — stay on default */ }
   })();
 </script>
@@ -315,33 +307,20 @@
   .about-stats div span{ font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--stone); }
 
   /* ---------- CATEGORIES ---------- */
-  .categories{ background:var(--black); }
-  .categories .section-head h2, .categories .section-head p{ color:var(--ivory); }
-  .categories .section-head p{ color:var(--bone); }
-  .cat-grid{
-    display:flex; gap:1px; background:var(--line-dark);
-    overflow-x:auto; scroll-snap-type:x proximity;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:thin; scrollbar-color:var(--champagne) transparent;
+  .approach{ background:var(--black); }
+  .approach .section-head h2, .approach .section-head p{ color:var(--ivory); }
+  .approach .section-head p{ color:var(--bone); }
+  .approach-points{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:48px;
+    max-width:900px; margin:56px auto 0; text-align:center;
   }
-  .cat-grid::-webkit-scrollbar{ height:4px; }
-  .cat-grid::-webkit-scrollbar-thumb{ background:var(--line-dark); }
-  .cat-tile{
-    position:relative; aspect-ratio:3/4; overflow:hidden; background:var(--black);
-    flex:0 0 240px; scroll-snap-align:start;
+  @media(max-width:760px){ .approach-points{ grid-template-columns:1fr; gap:36px; } }
+  .approach-points .num{
+    font-family:'Cormorant Garamond', serif; font-size:14px; color:var(--champagne);
+    letter-spacing:0.2em; display:block; margin-bottom:14px;
   }
-  @media(min-width:900px){ .cat-tile{ flex:1 1 0; min-width:200px; } }
-  .cat-tile img{ width:100%; height:100%; object-fit:cover; filter:grayscale(70%) brightness(.7);
-    transition: transform 1.1s var(--ease), filter .6s var(--ease); }
-  .cat-tile:hover img{ transform:scale(1.08); filter:grayscale(10%) brightness(.85); }
-  .cat-tile .overlay{
-    position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.85), transparent 55%);
-    display:flex; align-items:flex-end; padding:24px 18px;
-  }
-  .cat-tile .overlay span{
-    font-family:'Cormorant Garamond', serif; font-size:19px; color:var(--ivory); letter-spacing:0.02em;
-  }
-  .cat-tile .overlay small{ display:block; margin-top:6px; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--champagne-light); }
+  .approach-points h3{ font-family:'Cormorant Garamond', serif; font-size:21px; font-weight:400; color:var(--ivory); margin-bottom:10px; }
+  .approach-points p{ color:var(--bone); font-size:14px; line-height:1.7; }
 
   /* ---------- PORTFOLIO (facet reveal signature) ---------- */
   .portfolio{ background:var(--ivory-2); }
@@ -474,7 +453,7 @@
     </button>
     <nav class="primary-nav">
       <a href="#about" data-sk="O nás" data-en="About">O nás</a>
-      <a href="#categories" data-sk="Šperky" data-en="Jewelry">Šperky</a>
+      <a href="#approach" data-sk="Šperky" data-en="Jewelry">Šperky</a>
       <a href="#process" data-sk="Na mieru" data-en="Custom">Na mieru</a>
     </nav>
     <a href="#top" class="logo">LEROY<span> ◆ </span>DIAMONDS</a>
@@ -483,9 +462,9 @@
       <a href="#contact" data-sk="Kontakt" data-en="Contact">Kontakt</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Jazyk / Language">
-      <a href="/" class="lang-btn active" data-lang-btn="sk" aria-current="page">SK</a>
+      <a href="./" class="lang-btn active" data-lang-btn="sk" aria-current="page">SK</a>
       <span class="sep">/</span>
-      <a href="/en/" class="lang-btn" data-lang-btn="en">EN</a>
+      <a href="en/" class="lang-btn" data-lang-btn="en">EN</a>
     </div>
     <a href="#contact" class="nav-icon-btn" aria-label="Kontakt" style="display:flex;">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 3.5L7 8L13 3.5" stroke="currentColor" stroke-width="1"/><rect x="1" y="1.5" width="12" height="9" stroke="currentColor" stroke-width="1"/></svg>
@@ -496,7 +475,7 @@
 <section class="hero" id="top">
   <div class="hero-bg" id="heroBg"></div>
   <div class="wrap hero-content">
-    <span class="eyebrow" data-sk="Bratislava · Klenotníctvo od 2016" data-en="Bratislava · Fine Jewelry Since 2016">Bratislava · Klenotníctvo od 2016</span>
+    <span class="eyebrow" data-sk="Bratislava · Klenotníctvo od 2011" data-en="Bratislava · Fine Jewelry Since 2011">Bratislava · Klenotníctvo od 2011</span>
     <h1 class="serif" data-sk="Šperky, ktoré<br>nosia <em>váš príbeh.</em>" data-en="Jewelry that<br>carries <em>your story.</em>">Šperky, ktoré<br>nosia <em>váš príbeh.</em></h1>
     <p class="lead" data-sk="Ručne vyrábané diamantové šperky a šperky na mieru zo srdca Bratislavy — s láskou k drahým kameňom v každom detaile." data-en="Handcrafted diamond jewelry and bespoke pieces made in the heart of Bratislava — with love for fine stones in every detail.">Ručne vyrábané diamantové šperky a šperky na mieru zo srdca Bratislavy — s láskou k drahým kameňom v každom detaile.</p>
     <div class="hero-ctas">
@@ -518,7 +497,7 @@
       <p data-sk="Leroy Diamonds je klenotnícka spoločnosť s vášňou pre vytváranie jedinečných šperkov. Vznikla z lásky k diamantom a drahým kameňom a postupne sa stala dôveryhodným menom pre klientov, ktorí hľadajú viac než len šperk — hľadajú kus svojho príbehu." data-en="Leroy Diamonds is a jewelry house with a passion for creating one-of-a-kind pieces. Born from a love of diamonds and fine stones, it has grown into a trusted name for clients who seek more than jewelry — they seek a piece of their story.">Leroy Diamonds je klenotnícka spoločnosť s vášňou pre vytváranie jedinečných šperkov. Vznikla z lásky k diamantom a drahým kameňom a postupne sa stala dôveryhodným menom pre klientov, ktorí hľadajú viac než len šperk — hľadajú kus svojho príbehu.</p>
       <p data-sk="Každý kus vzniká ručne v našom bratislavskom ateliéri, s dôrazom na detail, čistotu línií a kameň, ktorý si zaslúži byť stredobodom pozornosti." data-en="Every piece is handmade in our Bratislava atelier, with attention to detail, clean lines, and a stone that deserves to be the centerpiece.">Každý kus vzniká ručne v našom bratislavskom ateliéri, s dôrazom na detail, čistotu línií a kameň, ktorý si zaslúži byť stredobodom pozornosti.</p>
       <div class="about-stats">
-        <div><b>2016</b><span data-sk="Založené" data-en="Founded">Založené</span></div>
+        <div><b>2011</b><span data-sk="Založené" data-en="Founded">Založené</span></div>
         <div><b>100%</b><span data-sk="Ručná práca" data-en="Handmade">Ručná práca</span></div>
         <div><b>1:1</b><span data-sk="Prístup ku klientovi" data-en="Client Focus">Prístup ku klientovi</span></div>
       </div>
@@ -526,15 +505,31 @@
   </div>
 </section>
 
-<section class="categories" id="categories">
+<section class="approach" id="approach">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow" data-sk="Kolekcie" data-en="Collections">Kolekcie</span>
-      <h2 class="serif" data-sk="Šperky pre každý okamih" data-en="Jewelry for Every Moment">Šperky pre každý okamih</h2>
-      <p data-sk="Od zásnub po každodennú eleganciu — každá kategória nesie rovnaký dôraz na remeslo a kameň." data-en="From engagements to everyday elegance — every category carries the same dedication to craft and stone.">Od zásnub po každodennú eleganciu — každá kategória nesie rovnaký dôraz na remeslo a kameň.</p>
+      <span class="eyebrow" data-sk="Náš prístup" data-en="Our Approach">Náš prístup</span>
+      <h2 class="serif" data-sk="Nie kolekcia. Váš jediný šperk." data-en="Not a collection. Your one piece.">Nie kolekcia. Váš jediný šperk.</h2>
+      <p data-sk="Nevytvárame šperky do zásoby. Každý kúsok navrhujeme a vyrábame individuálne, presne pre jedného klienta." data-en="We don't make jewelry to sit in stock. Every piece is designed and made individually, for one client at a time.">Nevytvárame šperky do zásoby. Každý kúsok navrhujeme a vyrábame individuálne, presne pre jedného klienta.</p>
+    </div>
+    <div class="approach-points reveal">
+      <div>
+        <span class="num">01</span>
+        <h3 data-sk="Váš návrh, nie katalóg" data-en="Your design, not a catalog">Váš návrh, nie katalóg</h3>
+        <p data-sk="Vychádzame z vášho príbehu a predstáv, nie z hotovej ponuky na sklade." data-en="We start from your story and vision, not a ready-made stock offering.">Vychádzame z vášho príbehu a predstáv, nie z hotovej ponuky na sklade.</p>
+      </div>
+      <div>
+        <span class="num">02</span>
+        <h3 data-sk="Jeden šperk, jeden klient" data-en="One piece, one client">Jeden šperk, jeden klient</h3>
+        <p data-sk="Kým pracujeme na vašom šperku, venujeme sa výhradne jemu — nie desiatkam kusov naraz." data-en="While we work on your piece, we give it our full attention — not one of dozens made at once.">Kým pracujeme na vašom šperku, venujeme sa výhradne jemu — nie desiatkam kusov naraz.</p>
+      </div>
+      <div>
+        <span class="num">03</span>
+        <h3 data-sk="S vami na každom kroku" data-en="With you at every step">S vami na každom kroku</h3>
+        <p data-sk="Od prvého náčrtu po finálne osadenie kameňa rozhodujete o každom detaile spolu s nami." data-en="From the first sketch to the final stone setting, you decide every detail alongside us.">Od prvého náčrtu po finálne osadenie kameňa rozhodujete o každom detaile spolu s nami.</p>
+      </div>
     </div>
   </div>
-  <div class="cat-grid reveal" id="collectionsGrid" aria-live="polite"></div>
 </section>
 
 <section class="portfolio" id="portfolio">
@@ -627,9 +622,9 @@
       <p data-sk="Pracujeme výhradne s overenými a certifikovanými diamantmi a drahokamami." data-en="We work exclusively with verified, certified diamonds and gemstones.">Pracujeme výhradne s overenými a certifikovanými diamantmi a drahokamami.</p>
     </div>
     <div class="why-item">
-      <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 4C15 4 6 8 6 15C6 21 15 27 15 27C15 27 24 21 24 15C24 8 15 4 15 4Z" stroke="#B79A6B" stroke-width="1"/></svg>
-      <h3 class="serif" data-sk="Doživotný servis" data-en="Lifetime Service">Doživotný servis</h3>
-      <p data-sk="Údržba, leštenie a úpravy veľkosti — o váš šperk sa staráme aj dlho po jeho odovzdaní." data-en="Maintenance, polishing, and resizing — we care for your jewelry long after it's been delivered.">Údržba, leštenie a úpravy veľkosti — o váš šperk sa staráme aj dlho po jeho odovzdaní.</p>
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 4V24" stroke="#B79A6B" stroke-width="1"/><path d="M6 8H24" stroke="#B79A6B" stroke-width="1"/><path d="M6 8L3 14C3 16 9 16 9 14L6 8Z" stroke="#B79A6B" stroke-width="0.8"/><path d="M24 8L21 14C21 16 27 16 27 14L24 8Z" stroke="#B79A6B" stroke-width="0.8"/><path d="M10 26H20" stroke="#B79A6B" stroke-width="1"/></svg>
+      <h3 class="serif" data-sk="Hodnota bez kompromisov" data-en="Value Without Compromise">Hodnota bez kompromisov</h3>
+      <p data-sk="Bez veľkoobchodných prirážok klenotníckych reťazcov získate rovnaký — často vyšší — štandard kvality za cenu, ktorá dáva zmysel." data-en="Without retail-chain markups, you get the same — often higher — standard of quality, at a price that makes sense.">Bez veľkoobchodných prirážok klenotníckych reťazcov získate rovnaký — často vyšší — štandard kvality za cenu, ktorá dáva zmysel.</p>
     </div>
   </div>
 </section>
@@ -656,11 +651,8 @@
     <div class="contact-grid">
       <div class="contact-info reveal">
         <span class="eyebrow" data-sk="Ateliér" data-en="Atelier">Ateliér</span>
-        <h3 class="serif" data-sk="Navštívte nás v Bratislave" data-en="Visit Us in Bratislava">Navštívte nás v Bratislave</h3>
-        <div class="info-row">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 15C8 15 13 10.5 13 6.5C13 3.5 10.8 1 8 1C5.2 1 3 3.5 3 6.5C3 10.5 8 15 8 15Z" stroke="currentColor" stroke-width="1"/><circle cx="8" cy="6.5" r="2" stroke="currentColor" stroke-width="1"/></svg>
-          <span>Vysoká 26, 811 06 Bratislava — Staré Mesto</span>
-        </div>
+        <h3 class="serif" data-sk="Ozvite sa nám" data-en="Reach Out to Us">Ozvite sa nám</h3>
+        <p style="color:var(--bone); font-size:14px; line-height:1.75; max-width:420px; margin:0 auto 30px;" data-sk="Nemáme verejnú predajňu — každý šperk vzniká výhradne na objednávku, v úzkej spolupráci s vami." data-en="We don't have a public showroom — every piece is made exclusively to order, in close collaboration with you.">Nemáme verejnú predajňu — každý šperk vzniká výhradne na objednávku, v úzkej spolupráci s vami.</p>
         <div class="info-row">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 3.5L8 8.5L15 3.5" stroke="currentColor" stroke-width="1"/><rect x="1" y="2" width="14" height="11" stroke="currentColor" stroke-width="1"/></svg>
           <span><a href="mailto:info@leroydiamonds.sk">info@leroydiamonds.sk</a></span>
@@ -695,20 +687,20 @@
       <div class="footer-col">
         <h4 data-sk="Navigácia" data-en="Navigation">Navigácia</h4>
         <a href="#about" data-sk="O nás" data-en="About">O nás</a>
-        <a href="#categories" data-sk="Šperky" data-en="Jewelry">Šperky</a>
+        <a href="#approach" data-sk="Šperky" data-en="Jewelry">Šperky</a>
         <a href="#process" data-sk="Na mieru" data-en="Custom">Na mieru</a>
         <a href="#portfolio" data-sk="Tvorba" data-en="Our Work">Tvorba</a>
       </div>
       <div class="footer-col">
-        <h4 data-sk="Kolekcie" data-en="Collections">Kolekcie</h4>
-        <a href="#" data-sk="Zásnubné prstene" data-en="Engagement Rings">Zásnubné prstene</a>
-        <a href="#" data-sk="Snubné obrúčky" data-en="Wedding Bands">Snubné obrúčky</a>
-        <a href="#" data-sk="Náhrdelníky" data-en="Necklaces">Náhrdelníky</a>
-        <a href="#" data-sk="Náušnice" data-en="Earrings">Náušnice</a>
+        <h4 data-sk="Šperky" data-en="Jewelry">Šperky</h4>
+        <a href="#approach" data-sk="Zásnubné prstene" data-en="Engagement Rings">Zásnubné prstene</a>
+        <a href="#approach" data-sk="Snubné obrúčky" data-en="Wedding Bands">Snubné obrúčky</a>
+        <a href="#approach" data-sk="Náhrdelníky" data-en="Necklaces">Náhrdelníky</a>
+        <a href="#approach" data-sk="Náušnice" data-en="Earrings">Náušnice</a>
       </div>
       <div class="footer-col">
         <h4 data-sk="Kontakt" data-en="Contact">Kontakt</h4>
-        <a href="#">Vysoká 26, Bratislava</a>
+        <a href="mailto:info@leroydiamonds.sk">info@leroydiamonds.sk</a>
         <a href="#contact" data-sk="Napísať dopyt" data-en="Send an Inquiry">Napísať dopyt</a>
         <a href="https://www.instagram.com/leroydiamonds/" target="_blank" rel="noopener">Instagram</a>
       </div>
@@ -794,21 +786,20 @@
   setLang(document.documentElement.lang === 'en' ? 'en' : 'sk', false);
 
   // ---------- DYNAMIC GALLERIES ----------
-  // Every gallery folder (images/hero, images/philosophy, images/collections,
-  // images/portfolio, images/instagram) is read from its own manifest.json,
-  // generated by generate-manifests.py. Nothing here is hardcoded to a
-  // specific filename — drop a new photo in the folder, regenerate the
-  // manifest, and it appears automatically.
+  // Every gallery folder (images/hero, images/philosophy, images/portfolio,
+  // images/instagram) is read from its own manifest.json, generated by
+  // generate-manifests.py. Nothing here is hardcoded to a specific
+  // filename — drop a new photo in the folder, regenerate the manifest,
+  // and it appears automatically.
   //
   // Display caps: if a folder holds more images than a section's limit,
   // the extra files are simply not rendered there (no error, nothing
-  // breaks) — collections/portfolio silently show only the first N per
-  // manifest order, and Instagram paginates through everything via
-  // "Load more" instead of a hard cap. See README → "Photo galleries"
-  // for the exact numbers and how to change them.
+  // breaks) — portfolio silently shows only the first N per manifest
+  // order, and Instagram paginates through everything via "Load more"
+  // instead of a hard cap. See README → "Photo galleries" for the exact
+  // numbers and how to change them.
   const INSTAGRAM_PAGE_SIZE = 10;
   const PORTFOLIO_MAX = 12;
-  const COLLECTIONS_MAX = 8;
 
   function reapplyLang(){
     setLang(document.documentElement.lang === 'en' ? 'en' : 'sk', false);
@@ -816,13 +807,15 @@
 
   async function fetchManifest(folder){
     try{
-      // Root-absolute path: works identically from "/" and from "/en/"
-      // (this assumes the site is served from the domain root — see
-      // README "Deploying to GitHub Pages" / custom domain section).
-      const res = await fetch(`/images/${folder}/manifest.json`, {cache:'no-cache'});
+      // Relative path (no leading slash): resolves correctly whether the
+      // site lives at the domain root, a custom domain, or a GitHub
+      // Pages project subpath (e.g. /leroy-diamonds/). The en/ version
+      // of this file has these rewritten with a "../" prefix by
+      // build-en.py, since it sits one folder deeper.
+      const res = await fetch(`images/${folder}/manifest.json`, {cache:'no-cache'});
       if(!res.ok) throw new Error('manifest not found: ' + folder);
       const data = await res.json();
-      return (data.images || []).map(item => ({...item, src: `/images/${folder}/${item.file}`}));
+      return (data.images || []).map(item => ({...item, src: `images/${folder}/${item.file}`}));
     }catch(err){
       console.warn('Gallery load skipped for', folder, err);
       return [];
@@ -848,30 +841,6 @@
     img.loading = 'lazy';
     img.decoding = 'async';
     el.prepend(img);
-  }
-
-  async function renderCollections(){
-    const all = await fetchManifest('collections');
-    const images = all.slice(0, COLLECTIONS_MAX);
-    if(all.length > COLLECTIONS_MAX){
-      console.info(`Leroy Diamonds: images/collections/ has ${all.length} photos, only the first ${COLLECTIONS_MAX} are shown (see COLLECTIONS_MAX in index.html). The rest are ignored, not deleted.`);
-    }
-    const grid = document.getElementById('collectionsGrid');
-    if(!grid) return;
-    if(!images.length){
-      grid.innerHTML = '<p class="gallery-empty">—</p>';
-      return;
-    }
-    grid.innerHTML = images.map(img => `
-      <a class="cat-tile" href="${img.link || '#'}">
-        <img src="${img.src}" alt="${img.alt || 'Leroy Diamonds'}" loading="lazy" decoding="async">
-        <div class="overlay"><div>
-          <span data-sk="${img.sk || ''}" data-en="${img.en || ''}">${img.sk || ''}</span>
-          <small data-sk="Zobraziť kolekciu" data-en="View Collection">Zobraziť kolekciu</small>
-        </div></div>
-      </a>
-    `).join('');
-    reapplyLang();
   }
 
   async function renderPortfolio(){
@@ -932,7 +901,6 @@
 
   renderHero();
   renderPhilosophy();
-  renderCollections();
   renderPortfolio();
   renderInstagram();
 </script>
